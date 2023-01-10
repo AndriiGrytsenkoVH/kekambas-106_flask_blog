@@ -9,3 +9,7 @@ def index():
 @app.route('/posts')
 def posts():
     return 'These are the posts!'
+
+@app.route('/signup')
+def signup():
+    return render_template('signup.html')
