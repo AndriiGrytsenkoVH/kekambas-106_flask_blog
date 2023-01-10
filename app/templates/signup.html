@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Sign Uo
+{% endblock %}
+
+{% block content %}
+
+    <form action="" class="bg-white rounded mt-3 p-5">
+        <h1 class="text-center">Sign Up</h1>
+        {{ form.email.label }}
+        {{ form.email(class="form-control", placeholder='Enter Email') }}
+
+        {{ form.username.label }}
+        {{ form.username(class="form-control", placeholder='Enter Username') }}
+
+        {{ form.password.label }}
+        {{ form.password(class="form-control", placeholder='Enter Password') }}
+
+        {{ form.confirm_password.label }}
+        {{ form.confirm_password(class="form-control", placeholder='Confirm Password') }}
+
+        {{ form.submit(class="btn-primary mt-3 w-100 bg-secondary", placeholder='Confirm Password') }}
+
+    </form>
+
+{% endblock %}
