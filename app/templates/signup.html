@@ -6,8 +6,10 @@
 
 {% block content %}
 
-    <form action="" class="bg-white rounded mt-3 p-5">
+    <form action="" class="bg-white rounded mt-3 p-5" method="post">
         <h1 class="text-center">Sign Up</h1>
+        {{ form.csrf_token }}
+
         {{ form.email.label }}
         {{ form.email(class="form-control", placeholder='Enter Email') }}
 
