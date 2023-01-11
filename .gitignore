@@ -1,3 +1,5 @@
 __pycache__
 # Ignore the virtual environment
 venv
+test.py
+.env
