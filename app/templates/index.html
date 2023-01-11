@@ -19,6 +19,11 @@
         {% else %}
         <li>{{ f.lower() }}</li>
         {% endif %}
+        {% if f[-1] == 'y' %}
+        <li>{{ f.upper() }}</li>
+        {% else %}
+        <li>{{ f.lower() }}</li>
+        {% endif %}
         {% endfor %}
     </ul>
 {% endblock %}
