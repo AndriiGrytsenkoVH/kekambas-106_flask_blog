@@ -3,3 +3,6 @@ __pycache__
 venv
 test.py
 .env
+
+
+app.db

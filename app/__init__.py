@@ -18,4 +18,4 @@ migrate = Migrate(app, db)
 
 
 # import all of the routes from the routes file into the current folder
-from . import routes
+from . import routes, models
