@@ -5,25 +5,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Hello {{ name }} from the index template</h1>
-    <h4>{{ 10 + 5 }}</h4>
 
-    {{ fruits }}
+    {% if current_user.is_authenticated %}
+        <h1 class="text-center">Welcome back, {{current_user.username}}!</h1>
+    {% else %}
+        <h1 class="text-center">Hello World</h1>
+    {% endif %}
 
-    I love {{ fruits[0] }}!
-    <h4>My favorite fruits are:</h4>
-    <ul>
-        {% for f in fruits %} 
-        {% if f[-1] == 'y' %}
-        <li>{{ f.upper() }}</li>
-        {% else %}
-        <li>{{ f.lower() }}</li>
-        {% endif %}
-        {% if f[-1] == 'y' %}
-        <li>{{ f.upper() }}</li>
-        {% else %}
-        <li>{{ f.lower() }}</li>
-        {% endif %}
-        {% endfor %}
-    </ul>
+    {{ current_user }}
 {% endblock %}
