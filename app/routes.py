@@ -6,12 +6,12 @@ from flask_login import login_user, logout_user, login_required, current_user
 
 @app.route('/')
 def index():
-    fruits = ['apple', 'banana', 'orange', 'strawberry', 'watermelon', 'mango', 'blueberry']
-    return render_template('index.html', name='Brian', fruits=fruits)
+    posts = Post.query.all()
+    return render_template('index.html', posts=posts)
 
-@app.route('/posts')
-def posts():
-    return 'These are the posts!'
+# @app.route('/posts')
+# def posts():
+#     return 'These are the posts!'
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -77,18 +77,11 @@ def logout():
 @login_required
 def create_post():
     form = PostForm()
-
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
     if form.validate_on_submit():
         title = form.title.data
         body = form.body.data
         print(title, body, current_user)
-
         new_post = Post(title=title, body=body, user_id=current_user.id)
         flash(f"{new_post.title} has been created", 'success')
         return redirect(url_for('index'))
-        
-
-#//////////////////////////////////////////////////////////////////////////////////////////////
-
     return render_template('create-post.html', form = form)

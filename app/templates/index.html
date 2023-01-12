@@ -12,5 +12,22 @@
         <h1 class="text-center">Hello World</h1>
     {% endif %}
 
-    {{ current_user }}
+    {% for post in posts %}
+        <div class="card my-3">
+            <div class="card-header">
+                {{post.title}}
+            </div>
+            <div class="card-body">
+            <blockquote class="blockquote mb-0">
+                <p>{{post.body}}</p>
+                <footer class="blockquote-footer">
+                    {{ post.author.username }} on 
+                    <cite title="Source Title">
+                        {{ post.date_created.strftime('%A, %B %d at %I:%M%p') }}
+                    </cite>
+                </footer>
+            </blockquote>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
