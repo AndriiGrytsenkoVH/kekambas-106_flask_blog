@@ -19,7 +19,7 @@ migrate = Migrate(app, db)
 
 login = LoginManager(app)
 login.login_view = 'login'
-login.login_message = 'You must construct additional pylons'
+login.login_message = 'You must be logged in to perform this action'
 login.login_message_category = 'danger'
 
 # import all of the routes from the routes file into the current folder

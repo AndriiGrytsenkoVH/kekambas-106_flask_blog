@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, redirect, url_for, flash
+from flask import render_template, redirect, url_for, flash, request
 from app.forms import SignUpForm, LoginForm, PostForm
 from app.models import User, Post
 from flask_login import login_user, logout_user, login_required, current_user
@@ -85,3 +85,32 @@ def create_post():
         flash(f"{new_post.title} has been created", 'success')
         return redirect(url_for('index'))
     return render_template('create-post.html', form = form)
+
+@app.route('/posts/<int:post_id>')
+def get_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if not post:
+        flash('No such post', "waning")
+    return render_template('post.html', post=post)
+
+@app.route('/posts/<post_id>/edit', methods=["GET", "POST"])
+@login_required
+def edit_post(post_id):
+    post = Post.query.get_or_404(post_id)
+    if not post:
+        flash('No such post', "waning")
+        return redirect(url_for('index'))
+    if post.author != current_user:
+        flash("cant edit posts you don't own", 'warning')
+        return redirect(url_for('index'))
+    form = PostForm()
+    if request.method == 'GET':
+        form.title.data = post.title
+        form.body.data = post.body
+    if form.validate_on_submit():
+        title = form.title.data
+        body = form.body.data
+        print(title, body)
+        # post.update_post()
+        # return redirect(url_for)
+    return render_template('edit_post.html', post=post, form=form)
