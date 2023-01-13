@@ -54,3 +54,7 @@ class Post(db.Model):
                 setattr(self, key, value)
         # Save the updates to the database
         db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()

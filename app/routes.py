@@ -9,10 +9,6 @@ def index():
     posts = Post.query.all()
     return render_template('index.html', posts=posts)
 
-# @app.route('/posts')
-# def posts():
-#     return 'These are the posts!'
-
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
     # Create an instance of the SignUpForm
@@ -117,3 +113,18 @@ def edit_post(post_id):
         form.title.data = post.title
         form.body.data = post.body
     return render_template('edit_post.html', post=post, form=form)
+
+@app.route('/posts/<post_id>/delete')
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    if not post:
+        flash(f"A post with id {post_id} does not exist", "danger")
+        return redirect(url_for('index'))
+    # Make sure the post author is the current user
+    if post.author != current_user:
+        flash("You do not have permission to delete this post", "danger")
+        return redirect(url_for('index'))
+    post.delete()
+    flash(f"{post.title} has been deleted", "info")
+    return redirect(url_for('index'))
