@@ -16,6 +16,12 @@ app.config.from_object(Config)
 db = SQLAlchemy(app)
 # Create an instance of Migrate to represent our migration engine
 migrate = Migrate(app, db)
+# Create an instance of LoginManager to set up login functionality
+login = LoginManager(app)
+# Set the login view to redirect unauthorized users
+login.login_view = 'login'
+login.login_message = 'You must be logged in to perform this action'
+login.login_message_category = 'danger'
 
 login = LoginManager(app)
 login.login_view = 'login'

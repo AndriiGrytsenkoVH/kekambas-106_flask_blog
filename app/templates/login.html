@@ -3,9 +3,8 @@
 {% block title %} Login {% endblock %}
 
 {% block content %}
-
 <form action="" class="bg-white rounded mt-3 p-5" method="post">
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center">Log In</h1>
     {{ form.csrf_token }}
 
     {{ form.username.label }}
@@ -16,5 +15,4 @@
 
     {{ form.submit(class='btn btn-primary w-100 mt-3') }}
 </form>
-
 {% endblock %}

@@ -6,29 +6,27 @@
 
 {% block content %}
 
-    {% if current_user.is_authenticated %}
-        <h1 class="text-center">Welcome back, {{current_user.username}}!</h1>
-    {% else %}
-        <h1 class="text-center">Hello World</h1>
-    {% endif %}
+{% if current_user.is_authenticated %}
+    <h1 class="text-center">Welcome Back, {{ current_user.username }}!</h1>
+{% else %}
+    <h1 class="text-center">Hello World</h1>
+{% endif %}
 
-    {% for post in posts %}
-        <div class="card my-3">
-            <div class="card-header">
-                {{post.title}}
-            </div>
-            <div class="card-body">
-            <blockquote class="blockquote mb-0">
-                <p>{{post.body}}</p>
-                <footer class="blockquote-footer">
-                    {{ post.author.username }} on 
-                    <cite title="Source Title">
-                        {{ post.date_created.strftime('%A, %B %d at %I:%M%p') }}
-                    </cite>
-                </footer>
-            </blockquote>
-            <a href="{{ url_for('get_post', post_id=post.id) }}" class="btn btn-primary mt-3" id="">See more</a>
-            </div>
+{% for post in posts %}
+    <div class="card my-3">
+        <div class="card-header">
+        {{ post.title }}
         </div>
-    {% endfor %}
+        <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>{{ post.body }}</p>
+            <footer class="blockquote-footer">{{ post.author.username }} on
+                <cite title="Source Title">{{ post.date_created.strftime('%A, %B %d at %I:%M%p') }}</cite>
+            </footer>
+        </blockquote>
+        <a href="{{ url_for('get_post', post_id=post.id) }}" class="btn btn-primary mt-3">See More</a>
+        </div>
+    </div>
+{% endfor %}
+
 {% endblock %}
