@@ -11,6 +11,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(256), nullable=False)
     date_created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     posts = db.relationship('Post', backref='author', lazy='dynamic')
+    token = db.Column(db.String(32), index=True, unique=True)
+    token_expiration = db.Column(db.DateTime)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -29,8 +31,8 @@ class User(db.Model, UserMixin):
             'id': self.id,
             'email': self.email,
             'username': self.username,
-            'password': self.password,
-            'date_created': self.date_created
+            'date_created': self.date_created,
+            # 'posts': [p.to_dict() for p in self.posts.all()]
         }
 
 @login.user_loader
