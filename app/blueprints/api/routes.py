@@ -79,7 +79,7 @@ def create_user():
 
 
 # Endpoint to get a single user
-@api.route('/users/<int:user_id>')
-def get_user(post_id):
-    user = User.query.get_or_404(post_id)
+@api.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = User.query.get_or_404(user_id)
     return user.to_dict()
